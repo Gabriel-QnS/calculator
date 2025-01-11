@@ -3,6 +3,8 @@ import './calculator.scss';
 function Calculator() {
     return (
         <div className="calculator">
+            <Display />
+            <KeyPad />
         </div>
     );
 };
@@ -14,7 +16,8 @@ function KeyPad(){
     const operationBtnIds = ["add", "subtract", "multiply", "divide", "clear", "equals"];
     return (
         <div className="calculator-keypad">
-            {buttons.map(button => <button>{button}</button>)}
+            {numberButtons.map((btn, index) => {return <button className='mathBtn' key={btn} id={buttonIds[index]}>{btn}</button>})}
+            {operationButtons.map((btn, index) => {return <button className='operatorBtn' key={btn} id={operationBtnIds[index]}>{btn}</button>})}
         </div>
     );
 };
@@ -24,3 +27,5 @@ function Display(){
         <div className="display">0</div>
     );
 };
+
+export { Calculator };
