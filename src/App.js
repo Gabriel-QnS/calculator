@@ -1,6 +1,7 @@
 import './App.scss';
 import './calculator.js'
 import { Calculator } from './calculator.js';
+import Footer from './Footer';
 
 function App() {
   return (

@@ -1,4 +1,3 @@
-import './calculator.scss';
 import { useState, useEffect } from 'react';
 import { evaluate } from 'mathjs';
 
@@ -55,7 +54,7 @@ function Calculator() {
 
 
     return (
-        <div className="calculator">
+        <div className="calculator container d-flex flex-column justify-content-center align-items-center">
             <Display result={result} expression={handleDisplay()} />
             <KeyPad functionPack={{handleJoint, handleNumbers, handleOperators, setLatestEntry, handleClear, handleClearAll, calc}} />
         </div>
@@ -96,7 +95,8 @@ function KeyPad({functionPack}) {
             }}};
 
     return (
-        <div className="calculator-keypad">
+        <div className="calculator-keypad
+        d-flex flex-wrap justify-content-center align-items-center">
             {numberButtons.map((btn, index) => {return <button 
             data-key={btn} 
             onClick={handleClick} 
@@ -128,9 +128,13 @@ function KeyPad({functionPack}) {
 function Display({ expression, result }) {
     
     return (
-        <div className="display">
+        <div className="display container-md 
+        d-flex flex-column justify-content-center align-items-center
+        border border-2 border-info">
             {expression}
-            {result && <div className="result">{result}</div>}
+            {result && <div className="result 
+            container-fluid text-center
+            border-top border-2 border-info">{result}</div>}
         </div>
     );
 };

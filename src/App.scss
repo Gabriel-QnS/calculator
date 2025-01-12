@@ -1,6 +1,21 @@
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 
-html{
+html, body{
+    background-color: $gray-900;
+    color: whitesmoke;
+};
+
+.display {
+    // Add styles to ensure the display area is visible and styled correctly
+    font-size: 2em;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    min-height: 50px;
+    text-align: right;
+};
+
+.App{
     background-color: $gray-900;
     color: whitesmoke;
 }
