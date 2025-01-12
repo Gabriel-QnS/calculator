@@ -27,6 +27,7 @@ function Calculator() {
                 return [...prev, "0", val];
             }
     
+            console.log("Joint array:", [...prev, val]);
             return [...prev, val];
         });
     };
@@ -62,7 +63,7 @@ function Calculator() {
     //Calcs
 
     const calc = () => {
-        const joined = joint.join("");
+        const joined = joint.join("") || 0;
     
         // Prevent division by zero
         if (/\/\s*0(\D|$)/.test(joined)) {
@@ -97,7 +98,7 @@ function KeyPad({functionPack}) {
     const operationButtons = ['+', '-', '*', '/'];
     const operationBtnIds = ["add", "subtract", "multiply", "divide"];
     const clearBtns = ['CE', 'C', '='];
-    const clearBtnIds = ['clear', 'clearAll', "equals"];
+    const clearBtnIds = ['clearOne', 'clear', "equals"];
 
     function handleClick(e) {
         const origin = e.target;
@@ -114,10 +115,10 @@ function KeyPad({functionPack}) {
             functionPack.handleOperators(key);
             functionPack.setLatestEntry(key);
         } else {
-            if(id === 'clearAll'){
+            if(id === 'clear'){
                 functionPack.setLatestEntry('');
                 functionPack.handleClearAll();
-            } else if (id === 'clear'){
+            } else if (id === 'clearOne'){
                 functionPack.handleClear();
                 functionPack.setLatestEntry('');
             } else if (id === 'equals'){
@@ -164,15 +165,17 @@ function KeyPad({functionPack}) {
 };
 
 function Display({ expression, result }) {
+    console.log("Expression:", expression); 
+    console.log("Result:", result);
     
     return (
-        <div className="display container-md 
+        <div id='display' className="display container-md 
         d-flex flex-column justify-content-center align-items-center
         border border-2 border-info" style={{maxWidth: 500}}>
             {expression}
             {result && <div className="result 
             container-fluid text-center
-            border-top border-2 border-info">{result}</div>}
+            border-top border-2 border-info">{result || "0"}</div>}
         </div>
     );
 };
