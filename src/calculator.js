@@ -62,7 +62,7 @@ function Calculator() {
 };
 
 function KeyPad({functionPack}) {
-    const numberButtons = ['.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    const numberButtons = ['.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].reverse();
     const buttonIds = ["decimal", "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
     const operationButtons = ['+', '-', '*', '/'];
     const operationBtnIds = ["add", "subtract", "multiply", "divide"];
@@ -74,11 +74,12 @@ function KeyPad({functionPack}) {
         const key = origin.getAttribute('data-key');//value of the button
         const id = origin.id;//'name' of the button: 'seven' or 'add'
         const className = origin.className; // 'mathBtn' or 'operatorBtn' to be identified
-        if(className === 'mathBtn'){
+        if(className.includes('mathBtn')){
+            console.log('event triggered by click!', origin);
             functionPack.handleJoint(key);
             functionPack.handleNumbers(key);
             functionPack.setLatestEntry(key);
-        } else if (className === 'operatorBtn'){
+        } else if (className.includes('operatorBtn')){
             functionPack.handleJoint(key);
             functionPack.handleOperators(key);
             functionPack.setLatestEntry(key);
@@ -102,7 +103,7 @@ function KeyPad({functionPack}) {
             {numberButtons.map((btn, index) => {return <button 
             data-key={btn} 
             onClick={handleClick} 
-            className='mathBtn col-4' 
+            className='mathBtn col-4 btn btn-info btn-outline-dark' 
             key={btn} 
             id={buttonIds[index]}
             >{btn}</button>})}
