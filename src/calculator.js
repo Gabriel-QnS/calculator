@@ -6,6 +6,7 @@ function Calculator() {
     const [numbers, setNumbers] = useState([]); // proces as strings 
     const [operators, setOperators] = useState([]); // process as strings
     const [joint, setJoint] = useState([]); // process as continuos string
+    const [latestEntry, setLatestEntry] = useState(''); // process as string
 
     const handleJoint = (val) => {
         setJoint((prev) => [...prev, val]);
@@ -18,7 +19,22 @@ function Calculator() {
     const handleOperators = (val) => {
         setOperators((prev) => [...prev, val]);
     };
+    
+    const handleClearAll = () => {
+        setNumbers([]);
+        setOperators([]);
+        setJoint([]);
+    };
 
+    const handleClear = () => {
+        if (numbers.includes(latestEntry)) {
+            setNumbers(numbers.slice(0, -1));
+        } else if (operators.includes(latestEntry)) {
+            setOperators(operators.slice(0, -1));
+        }
+        setJoint(joint.slice(0, -1));
+
+    }
     useEffect(() => {
         console.log(joint);
     }, [joint]);
@@ -27,7 +43,7 @@ function Calculator() {
     return (
         <div className="calculator">
             <Display />
-            <KeyPad functionPack={{handleJoint, handleNumbers, handleOperators}} />
+            <KeyPad functionPack={{handleJoint, handleNumbers, handleOperators, setLatestEntry, handleClear}} />
         </div>
     );
 };
@@ -48,11 +64,19 @@ function KeyPad({functionPack}){
         if(className === 'mathBtn'){
             functionPack.handleJoint(key);
             functionPack.handleNumbers(key);
+            functionPack.setLatestEntry(key);
         } else if (className === 'operatorBtn'){
             functionPack.handleJoint(key);
             functionPack.handleOperators(key);
+            functionPack.setLatestEntry(key);
         } else {
-            console.log('Error: button not identified');
+            if(id === 'clearAll'){
+                functionPack.setLatestEntry('');
+                functionPack.handleClearAll();
+            } else {
+                functionPack.handleClear();
+                functionPack.setLatestEntry('');
+            }
         };
 
         console.log({key, id, className, functionPack});
