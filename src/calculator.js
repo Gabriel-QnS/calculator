@@ -96,30 +96,37 @@ function KeyPad({functionPack}) {
 
     return (
         <div className="calculator-keypad
-        d-flex flex-wrap justify-content-center align-items-center">
+        d-flex flex-wrap justify-content-center align-items-center
+        flex-column">
+            <div className="mathButtons row justify-content-center">
             {numberButtons.map((btn, index) => {return <button 
             data-key={btn} 
             onClick={handleClick} 
-            className='mathBtn' 
+            className='mathBtn col-4' 
             key={btn} 
             id={buttonIds[index]}
             >{btn}</button>})}
+            </div>
             
+            <div className='container operatorButtons row'>
             {operationButtons.map((btn, index) => {return <button 
             data-key={btn} 
             onClick={handleClick}
-            className='operatorBtn' 
+            className='operatorBtn col-6' 
             key={btn} 
             id={operationBtnIds[index]}
             >{btn}</button>})}
+            </div>
             
+            <div className="container clearButtons row">
             {clearBtns.map((btn, index) => {return <button 
             data-key={btn} 
             onClick={handleClick}
-            className='clearBtn' 
+            className='clearBtn col-4' 
             key={btn} 
             id={clearBtnIds[index]}
             >{btn}</button>})}
+            </div>
 
         </div>
     );
