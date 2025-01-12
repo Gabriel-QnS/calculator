@@ -25,6 +25,7 @@ function Calculator() {
         setNumbers([]);
         setOperators([]);
         setJoint([]);
+        setResult('');
     };
 
     const handleClear = () => {
