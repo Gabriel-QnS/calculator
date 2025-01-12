@@ -54,7 +54,7 @@ function Calculator() {
 
 
     return (
-        <div className="calculator container d-flex flex-column justify-content-center align-items-center">
+        <div className="calculator d-flex flex-column justify-content-center">
             <Display result={result} expression={handleDisplay()} />
             <KeyPad functionPack={{handleJoint, handleNumbers, handleOperators, setLatestEntry, handleClear, handleClearAll, calc}} />
         </div>

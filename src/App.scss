@@ -3,6 +3,7 @@
 html, body{
     background-color: $gray-900;
     color: whitesmoke;
+    min-height: 100vh
 };
 
 .display {
@@ -18,4 +19,5 @@ html, body{
 .App{
     background-color: $gray-900;
     color: whitesmoke;
+    min-height: 100vh;
 }
