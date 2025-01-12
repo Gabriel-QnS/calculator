@@ -8,6 +8,7 @@ function Calculator() {
     const [operators, setOperators] = useState([]); // process as strings
     const [joint, setJoint] = useState([]); // process as continuos string
     const [latestEntry, setLatestEntry] = useState(''); // process as string
+    const [result, setResult] = useState(''); // process as number
 
     const handleJoint = (val) => {
         setJoint((prev) => [...prev, val]);
@@ -44,18 +45,18 @@ function Calculator() {
 
     function calc(){
         const joined = joint.join('');
-        const result = evaluate(joined);
-        console.log(result);
+        const calcResult = evaluate(joined);
+        setResult(calcResult);
     }
 
     function handleDisplay(){
         return joint.join('');
-    }
+    };
 
 
     return (
         <div className="calculator">
-            <Display expression={handleDisplay()} />
+            <Display result={result} expression={handleDisplay()} />
             <KeyPad functionPack={{handleJoint, handleNumbers, handleOperators, setLatestEntry, handleClear, handleClearAll, calc}} />
         </div>
     );
@@ -92,13 +93,7 @@ function KeyPad({functionPack}) {
             } else if (id === 'equals'){
                 functionPack.setLatestEntry('');
                 functionPack.calc();
-            }
-        };
-
-        console.log({key, id, className, functionPack});
-        
-
-    }
+            }}};
 
     return (
         <div className="calculator-keypad">
@@ -130,9 +125,13 @@ function KeyPad({functionPack}) {
     );
 };
 
-function Display({ expression }) {
+function Display({ expression, result }) {
+    
     return (
-        <div className="display">{expression}</div>
+        <div className="display">
+            {expression}
+            {result && <div className="result">{result}</div>}
+        </div>
     );
 };
 
