@@ -63,7 +63,7 @@ function Calculator() {
 
 function KeyPad({functionPack}) {
     const numberButtons = ['.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].reverse();
-    const buttonIds = ["decimal", "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+    const buttonIds = ["decimal", "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"].reverse();
     const operationButtons = ['+', '-', '*', '/'];
     const operationBtnIds = ["add", "subtract", "multiply", "divide"];
     const clearBtns = ['CE', 'C', '='];
@@ -113,7 +113,7 @@ function KeyPad({functionPack}) {
             {operationButtons.map((btn, index) => {return <button 
             data-key={btn} 
             onClick={handleClick}
-            className='operatorBtn col-6' 
+            className='operatorBtn btn btn-outline-dark text-dark fw-bold col-6' 
             key={btn} 
             id={operationBtnIds[index]}
             >{btn}</button>})}
@@ -123,7 +123,7 @@ function KeyPad({functionPack}) {
             {clearBtns.map((btn, index) => {return <button 
             data-key={btn} 
             onClick={handleClick}
-            className='clearBtn col-4' 
+            className='clearBtn btn outline-btn-dark col-4' 
             key={btn} 
             id={clearBtnIds[index]}
             >{btn}</button>})}

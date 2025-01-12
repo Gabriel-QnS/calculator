@@ -20,4 +20,41 @@ html, body{
     background-color: $gray-900;
     color: whitesmoke;
     min-height: 100vh;
+};
+#add {
+    background-color: $cyan-600;
 }
+#subtract {
+    background-color: $cyan-500;
+}
+#multiply {
+    background-color: $cyan-400;
+}
+#divide {
+    background-color: $cyan-300;
+};
+#clear {
+    background-color: $cyan-100;
+}
+#clearAll {
+    background-color: $cyan-200;
+}
+#equals {
+    background-color: $cyan-300;
+};
+#decimal{
+    background-color: $cyan-300;
+}
+
+/* Hover, focus, and active states */
+#add:hover, #add:focus, #add:active,
+#subtract:hover, #subtract:focus, #subtract:active,
+#multiply:hover, #multiply:focus, #multiply:active,
+#divide:hover, #divide:focus, #divide:active,
+#clear:hover, #clear:focus, #clear:active,
+#clearAll:hover, #clearAll:focus, #clearAll:active,
+#equals:hover, #equals:focus, #equals:active {
+    background-color: $gray-900;
+    color: whitesmoke !important;
+}
+
