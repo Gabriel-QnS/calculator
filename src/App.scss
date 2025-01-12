@@ -56,5 +56,9 @@ html, body{
 #equals:hover, #equals:focus, #equals:active {
     background-color: $gray-900;
     color: whitesmoke !important;
+};
+.titleMath:hover, .titleMath:focus, .titleMath:active {
+    color: $cyan-300;
+
 }
 

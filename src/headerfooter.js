@@ -1,9 +1,8 @@
 function Header() {
     return (
-      <header className='text-white text-center p-2
-      border-bottom border-5 border-primary' style={{backgroundColor: '$blue-800'}}>
-        <h1>Digital Drum Kit</h1>
-        <p className='lead'>Click or press keys to play</p>
+      <header className='text-dark text-center p-2
+      border-bottom border-5 border-info bg-info'>
+        <h1 className="display-6">Calculator made with <span className="titleMath text-primary-emphasis fw-bold">MathJS</span></h1>
       </header>
     );
   };

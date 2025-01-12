@@ -25,7 +25,7 @@ function Calculator() {
         setNumbers([]);
         setOperators([]);
         setJoint([]);
-        setResult('');
+        setResult(""); //reset the result
     };
 
     const handleClear = () => {
@@ -99,8 +99,8 @@ function KeyPad({functionPack}) {
     return (
         <div className="calculator-keypad
         d-flex flex-wrap justify-content-center align-items-center
-        flex-column">
-            <div className="mathButtons row justify-content-center">
+        flex-column m-auto" style={{maxWidth: 500}}>
+            <div className="mathButtons row justify-content-center d-flex justify-content-center align-items-center">
             {numberButtons.map((btn, index) => {return <button 
             data-key={btn} 
             onClick={handleClick} 
@@ -139,7 +139,7 @@ function Display({ expression, result }) {
     return (
         <div className="display container-md 
         d-flex flex-column justify-content-center align-items-center
-        border border-2 border-info">
+        border border-2 border-info" style={{maxWidth: 500}}>
             {expression}
             {result && <div className="result 
             container-fluid text-center
