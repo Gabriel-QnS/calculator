@@ -7,7 +7,7 @@ function Calculator() {
     const [operators, setOperators] = useState([]); // process as strings
     const [joint, setJoint] = useState([]); // process as continuos string
     const [latestEntry, setLatestEntry] = useState(''); // process as string
-    const [result, setResult] = useState(''); // process as number
+    const [result, setResult] = useState('0'); // process as number
 
     const handleJoint = (val) => {
         setJoint((prev) => [...prev, val]);
@@ -25,7 +25,7 @@ function Calculator() {
         setNumbers([]);
         setOperators([]);
         setJoint([]);
-        setResult(""); //reset the result
+        setResult("0"); //reset the result
     };
 
     const handleClear = () => {
