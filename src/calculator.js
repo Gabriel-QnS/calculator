@@ -49,10 +49,15 @@ function Calculator() {
         console.log(result);
     }
 
+    function handleDisplay(){
+        const joined = joint.join('');
+        return joined;
+    }
+
 
     return (
         <div className="calculator">
-            <Display />
+            <Display functionPack={handleDisplay} />
             <KeyPad functionPack={{handleJoint, handleNumbers, handleOperators, setLatestEntry, handleClear, calc}} />
         </div>
     );
@@ -127,7 +132,7 @@ function KeyPad({functionPack}){
     );
 };
 
-function Display(){
+function Display({functionPack}){
 
     const [input, setInput] = useState('');
 
