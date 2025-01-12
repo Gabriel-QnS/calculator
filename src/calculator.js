@@ -1,5 +1,7 @@
 import './calculator.scss';
 import { useState, useEffect } from 'react';
+import Math from 'mathjs';
+import { evaluate } from 'mathjs';
 
 function Calculator() {
 
@@ -39,11 +41,19 @@ function Calculator() {
         console.log(joint);
     }, [joint]);
 
+    //Calcs
+
+    function calc(){
+        const joined = joint.join('');
+        const result = evaluate(joined);
+        console.log(result);
+    }
+
 
     return (
         <div className="calculator">
             <Display />
-            <KeyPad functionPack={{handleJoint, handleNumbers, handleOperators, setLatestEntry, handleClear}} />
+            <KeyPad functionPack={{handleJoint, handleNumbers, handleOperators, setLatestEntry, handleClear, calc}} />
         </div>
     );
 };
@@ -51,10 +61,10 @@ function Calculator() {
 function KeyPad({functionPack}){
     const numberButtons = ['.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     const buttonIds = ["decimal", "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
-    const operationButtons = ['+', '-', '*', '/', '='];
-    const operationBtnIds = ["add", "subtract", "multiply", "divide", "equals"];
-    const clearBtns = ['CE', 'C'];
-    const clearBtnIds = ['clear', 'clearAll'];
+    const operationButtons = ['+', '-', '*', '/'];
+    const operationBtnIds = ["add", "subtract", "multiply", "divide"];
+    const clearBtns = ['CE', 'C', '='];
+    const clearBtnIds = ['clear', 'clearAll', "equals"];
 
     function handleClick(e) {
         const origin = e.target;
@@ -73,9 +83,12 @@ function KeyPad({functionPack}){
             if(id === 'clearAll'){
                 functionPack.setLatestEntry('');
                 functionPack.handleClearAll();
-            } else {
+            } else if (id === 'clear'){
                 functionPack.handleClear();
                 functionPack.setLatestEntry('');
+            } else if (id === 'equals'){
+                functionPack.setLatestEntry('');
+                functionPack.calc();
             }
         };
 
