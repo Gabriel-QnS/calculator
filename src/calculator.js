@@ -10,7 +10,25 @@ function Calculator() {
     const [result, setResult] = useState('0'); // process as number
 
     const handleJoint = (val) => {
-        setJoint((prev) => [...prev, val]);
+        setJoint((prev) => {
+            const lastEntry = prev[prev.length - 1];
+    
+            // Prevent multiple decimals in a single number
+            if (val === "." && /\.\d*$/.test(prev.join(""))) return prev;
+    
+            // Prevent consecutive operators
+            if (/[\+\-\*\/]/.test(val) && /[\+\-\*\/]$/.test(prev.join(""))) return prev;
+    
+            // Prevent leading operators
+            if (prev.length === 0 && /[\+\-\*\/]/.test(val)) return prev;
+    
+            // Automatically prefix decimal with zero
+            if (val === "." && (!lastEntry || /[\+\-\*\/]/.test(lastEntry))) {
+                return [...prev, "0", val];
+            }
+    
+            return [...prev, val];
+        });
     };
 
     const handleNumbers = (val) => {
@@ -43,11 +61,22 @@ function Calculator() {
 
     //Calcs
 
-    function calc(){
-        const joined = joint.join('');
-        const calcResult = evaluate(joined);
-        setResult(calcResult);
-    }
+    const calc = () => {
+        const joined = joint.join("");
+    
+        // Prevent division by zero
+        if (/\/\s*0(\D|$)/.test(joined)) {
+            alert("Error: Division by zero is not allowed!");
+            return;
+        }
+    
+        try {
+            const calcResult = evaluate(joined);
+            setResult(calcResult.toString());
+        } catch (err) {
+            alert("Invalid expression. Please check your input.");
+        }
+    };
 
     function handleDisplay(){
         return joint.join('');
