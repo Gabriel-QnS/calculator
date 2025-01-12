@@ -5,11 +5,18 @@ function Calculator() {
 
     const [numbers, setNumbers] = useState([]); // proces as strings 
     const [operators, setOperators] = useState([]); // process as strings
-    const [joint, setJoint] = useState([]); // process as string
+    const [joint, setJoint] = useState([]); // process as continuos string
 
-    const test = (val) =>{
+    const handleJoint = (val) => {
         setJoint((prev) => [...prev, val]);
-        
+    };
+
+    const handleNumbers = (val) => {
+        setNumbers((prev) => [...prev, val]);
+    };
+
+    const handleOperators = (val) => {
+        setOperators((prev) => [...prev, val]);
     };
 
     useEffect(() => {
@@ -20,7 +27,7 @@ function Calculator() {
     return (
         <div className="calculator">
             <Display />
-            <KeyPad functionPack={{test, setNumbers, setOperators}} />
+            <KeyPad functionPack={{handleJoint, handleNumbers, handleOperators}} />
         </div>
     );
 };
@@ -28,8 +35,10 @@ function Calculator() {
 function KeyPad({functionPack}){
     const numberButtons = ['.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     const buttonIds = ["decimal", "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
-    const operationButtons = ['+', '-', '*', '/','clear', '='];
-    const operationBtnIds = ["add", "subtract", "multiply", "divide", "clear", "equals"];
+    const operationButtons = ['+', '-', '*', '/', '='];
+    const operationBtnIds = ["add", "subtract", "multiply", "divide", "equals"];
+    const clearBtns = ['CE', 'C'];
+    const clearBtnIds = ['clear', 'clearAll'];
 
     function handleClick(e) {
         const origin = e.target;
@@ -37,8 +46,14 @@ function KeyPad({functionPack}){
         const id = origin.id;//'name' of the button: 'seven' or 'add'
         const className = origin.className; // 'mathBtn' or 'operatorBtn' to be identified
         if(className === 'mathBtn'){
-            functionPack.test(key);
-        }
+            functionPack.handleJoint(key);
+            functionPack.handleNumbers(key);
+        } else if (className === 'operatorBtn'){
+            functionPack.handleJoint(key);
+            functionPack.handleOperators(key);
+        } else {
+            console.log('Error: button not identified');
+        };
 
         console.log({key, id, className, functionPack});
         
@@ -54,6 +69,7 @@ function KeyPad({functionPack}){
             key={btn} 
             id={buttonIds[index]}
             >{btn}</button>})}
+            
             {operationButtons.map((btn, index) => {return <button 
             data-key={btn} 
             onClick={handleClick}
@@ -61,6 +77,15 @@ function KeyPad({functionPack}){
             key={btn} 
             id={operationBtnIds[index]}
             >{btn}</button>})}
+            
+            {clearBtns.map((btn, index) => {return <button 
+            data-key={btn} 
+            onClick={handleClick}
+            className='clearBtn' 
+            key={btn} 
+            id={clearBtnIds[index]}
+            >{btn}</button>})}
+
         </div>
     );
 };
