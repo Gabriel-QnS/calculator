@@ -1,6 +1,5 @@
 import './calculator.scss';
 import { useState, useEffect } from 'react';
-import Math from 'mathjs';
 import { evaluate } from 'mathjs';
 
 function Calculator() {
@@ -50,20 +49,19 @@ function Calculator() {
     }
 
     function handleDisplay(){
-        const joined = joint.join('');
-        return joined;
+        return joint.join('');
     }
 
 
     return (
         <div className="calculator">
-            <Display functionPack={handleDisplay} />
-            <KeyPad functionPack={{handleJoint, handleNumbers, handleOperators, setLatestEntry, handleClear, calc}} />
+            <Display expression={handleDisplay()} />
+            <KeyPad functionPack={{handleJoint, handleNumbers, handleOperators, setLatestEntry, handleClear, handleClearAll, calc}} />
         </div>
     );
 };
 
-function KeyPad({functionPack}){
+function KeyPad({functionPack}) {
     const numberButtons = ['.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     const buttonIds = ["decimal", "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
     const operationButtons = ['+', '-', '*', '/'];
@@ -132,16 +130,9 @@ function KeyPad({functionPack}){
     );
 };
 
-function Display({functionPack}){
-
-    const [input, setInput] = useState('');
-
-    function simpleRegistry(entry){
-        setInput(input + entry)
-    }
-
+function Display({ expression }) {
     return (
-        <div className="display">0</div>
+        <div className="display">{expression}</div>
     );
 };
 
